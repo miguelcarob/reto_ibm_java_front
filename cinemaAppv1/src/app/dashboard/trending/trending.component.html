@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<main>
+
+  <section class="pt-20 pb-48">
+    <div class="container mx-auto px-4">
+      <div class="mb-8">
+        <div class="text-2xl font-semibold text-center">
+          Conoce las tendencias actuales.
+        </div>
+      </div>
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
+             *ngFor="let videogame of myListFavoriteVideogames; let index = index">
+          <div class="px-6">
+            <img
+              alt="..."
+              src="./assets/img/control.png"
+              class="border-solid border-4 shadow-lg rounded-lg max-w-full mx-auto"
+              style="max-width: 120px;"
+            />
+            <div class="pt-6 text-center">
+              <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                {{videogame.Name}}
+              </p>
+              <h5 class="text-xl font-bold">{{videogame.Year_of_Release | number: '1.0-0'}}</h5>
+              <div class="mt-6">
+                <button
+                  [ngClass]="{
+                  'bg-blue-600 text-white': videogame.puntuacion === 1,
+                  'bg-gray-100 btn-action-dislike': videogame.puntuacion !== 1
+                  }"
+                  class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                  (click)="likeVideogame(videogame, index)"
+                >
+                  <i
+                    [ngClass]="{
+                    fas: videogame.puntuacion === 1,
+                    far: videogame.puntuacion !== 1
+                    }"
+                    class="fa-thumbs-up"></i></button
+                >
+                <button
+                  [ngClass]="{
+                  'bg-red-600 text-white': videogame.puntuacion === -1,
+                  'bg-gray-100 btn-action-dislike': videogame.puntuacion !== -1
+                  }"
+                  class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                  (click)="dislikeVideogame(videogame, index)"
+                >
+                  <i
+                    [ngClass]="{
+                    fas: videogame.puntuacion === -1,
+                    far: videogame.puntuacion !== -1
+                    }"
+                    class="fa-thumbs-down"></i></button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+<app-footer></app-footer>

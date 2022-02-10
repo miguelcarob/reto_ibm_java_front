@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<main>
+
+  <section class="pt-20 pb-48">
+    <div class="container mx-auto px-4">
+      <div class="mb-8">
+        <div class="text-2xl font-semibold text-center">
+          Estos son los videojuegos que te han gustado.
+        </div>
+      </div>
+      <sa-spinner-diamond [size]="50" [thickness]="100" [speed]="100" color="#dd0031" secondaryColor="rgba(24, 24, 24, 0.1)" ></sa-spinner-diamond>
+      <div class="flex flex-wrap">
+        <ng-container *ngIf="myListFavoriteVideogames.length === 0">
+          <div class="flex text-2xl font-medium text-center mt-10 mx-auto">
+            No hay gustos relacionados. Interactua con la plataforma para adquirir gustos.
+          </div>
+        </ng-container>
+        <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
+             *ngFor="let videogame of myListFavoriteVideogames; let index = index">
+          <div class="px-6">
+            <img
+              alt="..."
+              src="./assets/img/control.png"
+              class="border-solid border-4 shadow-lg rounded-full max-w-full mx-auto"
+              style="max-width: 120px;"
+            />
+            <div class="pt-6 text-center">
+              <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                {{videogame.Name}}
+              </p>
+              <h5 class="text-xl font-bold">{{videogame.Year_of_Release | number: '1.0-0'}}</h5>
+              <div class="mt-6">
+
+                <button
+                  [ngClass]="{'bg-red-600 text-white': videogame.Puntuacion === -1,'bg-gray-100 btn-action-dislike': videogame.Puntuacion !== -1 }"
+                  class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                  (click)="dislikeVideogame(videogame, index)"
+                >
+                  <i
+                    [ngClass]="{fas: videogame.Puntuacion === -1, far: videogame.Puntuacion !== -1}"
+                    class="fa-thumbs-down"></i></button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+<app-footer></app-footer>

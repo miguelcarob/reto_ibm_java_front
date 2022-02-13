@@ -22,12 +22,12 @@
             />
             <div class="pt-6 text-center">
               <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                {{videogame.Name}}
+                {{videogame.titleFilm}}
               </p>
               <p>
-                {{videogame.Overview}} ({{videogame.Platform}})
+                {{videogame.descriptionFilm}} ({{videogame.Platform}})
               </p>
-              <h5 class="text-xl font-bold">Año {{videogame.Year_of_Release | number: '1.0-0'}}</h5>
+              <h5 class="text-xl font-bold">Año {{videogame.releaseDateFilm }}</h5>
               <div class="mt-6">
 
                 <button

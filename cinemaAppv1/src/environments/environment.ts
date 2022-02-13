@@ -5,7 +5,7 @@
 export const environment = {
 
   // apiUrl: 'http://127.0.0.1:8000/api_movies/',
-   apiUrl: 'http://127.0.0.1:8080/',
+   apiUrl: 'https://fierce-dawn-72637.herokuapp.com/',
   production: false
 };
 

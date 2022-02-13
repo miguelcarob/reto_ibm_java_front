@@ -30,7 +30,7 @@ export class DashboardService {
   // ----------------------------------------------------------------------------------------------------
 
   getRandomVideogames(): Observable<any> {
-    return this._http.get<any>(this.API_URL + 'peliculas/');
+    return this._http.get<any>(this.API_URL + 'film/');
   }
 
   getRecommendationContent(body): Observable<any> {
@@ -38,7 +38,7 @@ export class DashboardService {
   }
 
   getRecommendationUser(codUsuario: number): Observable<any> {
-    return this._http.get<any>(this.API_URL + 'recomendacionUsuario/' + codUsuario);
+    return this._http.get<any>(this.API_URL + 'offer/' );
   }
 
   getMyFavoriteVideogames(codUsuario: number): Observable<any> {

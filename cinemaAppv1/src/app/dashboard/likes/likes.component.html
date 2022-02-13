@@ -5,10 +5,108 @@
     <div class="container mx-auto px-4">
       <div class="mb-8">
         <div class="text-2xl font-semibold text-center">
-          Estos son los videojuegos que te han gustado.
+          Este es tu perfil!
         </div>
       </div>
       <sa-spinner-diamond [size]="50" [thickness]="100" [speed]="100" color="#dd0031" secondaryColor="rgba(24, 24, 24, 0.1)" ></sa-spinner-diamond>
+
+      <div class="flex-auto px-4 lg:px-10 pt-4 pt-0">
+        <form class="my-6" >
+          <div class="relative w-full">
+            <label
+                    class="block uppercase text-gray-700 text-xs font-bold mb-2"
+            >Correo</label
+            ><input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                  placeholder="Correo"
+
+                  style="transition: all 0.15s ease 0s;"
+          />
+          </div>
+          <div class="relative w-full my-6">
+            <label
+                    class="block uppercase text-gray-700 text-xs font-bold mb-2"
+            >Nombre del usuario</label
+            ><input
+                  type="text"
+                  class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                  placeholder="Nombre del usuario"
+
+                  style="transition: all 0.15s ease 0s;"
+          /></div>
+
+          <div class="flex my-6">
+
+            <div class="block w-1/2 pr-4">
+              <label
+                      class="uppercase text-gray-700 text-xs font-bold mb-2"
+              >País</label
+              ><input
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                    placeholder="País"
+
+                    style="transition: all 0.15s ease 0s;"
+            />
+            </div>
+
+            <div class="block w-1/2 pl-4">
+              <label
+                      class="uppercase text-gray-700 text-xs font-bold mb-2"
+              >Fecha de nacimiento</label
+              ><input
+                    mat-input
+                    type="date"
+                    class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                    placeholder="Fecha de nacimiento"
+
+                    style="transition: all 0.15s ease 0s;"
+            />
+            </div>
+          </div>
+
+          <div class="flex my-6">
+            <div class="w-1/2 pr-4">
+              <label
+                      class="uppercase text-gray-700 text-xs font-bold mb-2"
+              >Contraseña</label
+              ><input
+                    type="password"
+                    class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                    placeholder="Contraseña"
+
+                    style="transition: all 0.15s ease 0s;"
+            />
+            </div>
+
+            <div class="w-1/2 pl-4">
+              <label
+                      class="uppercase text-gray-700 text-xs font-bold mb-2"
+              >Confirmar contraseña</label
+              ><input
+                    type="password"
+                    class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                    placeholder="Confirmar contraseña"
+
+                    style="transition: all 0.15s ease 0s;"
+            />
+            </div>
+          </div>
+
+          <div class="text-center mt-8">
+            <button
+                    class="btn-register bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                    type="button"
+                    style="transition: all 0.15s ease 0s;"
+
+            >
+              Editar Información
+            </button>
+          </div>
+        </form>
+      </div>
+
       <div class="flex flex-wrap">
         <ng-container *ngIf="myListFavoriteVideogames.length === 0">
           <div class="flex text-2xl font-medium text-center mt-10 mx-auto">
@@ -45,6 +143,9 @@
           </div>
         </div>
       </div>
+
+
+
     </div>
   </section>
 

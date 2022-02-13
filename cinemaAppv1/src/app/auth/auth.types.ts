@@ -3,6 +3,6 @@ export interface User {
   nombre_usuario: string,
   pais: string,
   fecha_nacimiento: string,
-  correo: string,
-  password: string
+  usernameUserCinema: string,
+  passwordUserCinema: string
 }

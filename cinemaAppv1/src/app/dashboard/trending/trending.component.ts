@@ -43,7 +43,7 @@ export class TrendingComponent implements OnInit {
     this._dashboardService.getRecommendationUser( this._authService.userLocalStorage.cod_usuario ).subscribe((response) => {
         console.log('success:', response);
 
-        this.myListFavoriteVideogames = response.message;
+        this.myListFavoriteVideogames = response;
       }, (error) => {
         console.error(error, 'Ha ocurrido un error.');
       }

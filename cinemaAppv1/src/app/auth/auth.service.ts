@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {User} from './auth.types';
 import {tap} from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class AuthService {
   // -----------------------------------------------------------------------------------------------------
   // @ Attributes
   // ----------------------------------------------------------------------------------------------------
-  private readonly API_URL = environment.apiUrl;
+  private readonly API_URL =environment.apiUrl;
 
   serviceLoading = false;
 
@@ -51,16 +51,21 @@ export class AuthService {
   // -----------------------------------------------------------------------------------------------------
 
   signIn(user: User): Observable<any> {
+
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    console.log("linea 56");
     return this._http
-      .post(this.API_URL + 'login/', user)
+      .post(this.API_URL + 'users/login/', JSON.stringify(user),{headers:headers})
       .pipe(
         tap((response) => {
-          if (response && response.status && response.status === 'Success') {
 
+          if ('emailUserCinema' in response) {
+            console.log("linea 62");
+            console.log(response)
             user.cod_usuario = response.cod_usuario;
 
             this._currentUser.next(user);
-            this._saveUserLocalStorage(user.correo, user.cod_usuario);
+            this._saveUserLocalStorage(user.usernameUserCinema, user.cod_usuario);
 
             this._router.navigate(['./dashboard']);
           } else {

@@ -34,6 +34,7 @@ export class DashboardGuard implements CanActivate {
 
     if (!status) {
       this._router.navigate(['/auth/signin']);
+      console.log("error linea 37");
     }
 
     return status;

@@ -1,8 +1,21 @@
 export interface User {
-  cod_usuario: number,
-  nombre_usuario: string,
-  pais: string,
-  fecha_nacimiento: string,
-  usernameUserCinema: string,
-  passwordUserCinema: string
+    user_table: number,
+    nameUserCinema: string,
+    surnameUserCinema:string,
+    emailUserCinema: string,
+    typeUser:number,
+    usernameUserCinema: string,
+    passwordUserCinema: string
 }
+
+
+/**
+ * response del servicio
+ * {
+ *   "usernameUserCinema": "string",
+ *   "nameUserCinema": "string",
+ *   "surnameUserCinema": "string",
+ *   "emailUserCinema": "string@gmail.com",
+
+ * }
+ */

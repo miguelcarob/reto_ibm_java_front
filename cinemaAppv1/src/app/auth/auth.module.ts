@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AuthRoutingModule } from './auth-routing.module';
+import {AuthRoutingModule} from './auth-routing.module';
 
 import {LoginComponent} from './login/login.component';
 import {SharedModule} from '../shared/shared.module';
@@ -10,10 +10,11 @@ import {AuthService} from './auth.service';
 import {MatInputModule} from '@angular/material/input';
 
 
+
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent
+      LoginComponent,
+      RegisterComponent,
   ],
   imports: [
     MatInputModule,
@@ -21,8 +22,9 @@ import {MatInputModule} from '@angular/material/input';
     AuthRoutingModule,
     ReactiveFormsModule,
   ],
-  providers: [
-    AuthService
-  ]
+    providers: [
+        AuthService
+    ]
+
 })
-export class AuthModule {}
+export class AuthModule { }

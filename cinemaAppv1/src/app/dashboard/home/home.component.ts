@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DashboardService} from '../dashboard.service';
 import {AuthService} from '../../auth/auth.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-showMovies',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

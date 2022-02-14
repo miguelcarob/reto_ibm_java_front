@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         console.log('success:', response);
 
       }, (error) => {
-        console.error(error, 'Ha ocurrido un error.');
+        console.error(error, 'Error line 50');
       }
     )
   }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   private _initForm(): void {
     this.formLogin = this._formBuilder.group({
-      usernameUserCinema: ['', [Validators.required, Validators.email]],
+      usernameUserCinema: ['', [Validators.required]],
       passwordUserCinema: ['', [Validators.required]],
     });
   }

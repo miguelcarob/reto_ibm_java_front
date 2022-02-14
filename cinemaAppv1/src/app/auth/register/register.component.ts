@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   maxDateRegister: any;
 
   formRegister: FormGroup;
+  // error al usuario
+  errorMessage= '';
 
   // -----------------------------------------------------------------------------------------------------
   // @ Constructor
@@ -36,9 +38,6 @@ export class RegisterComponent implements OnInit {
   // ----------------------------------------------------------------------------------------------------
 
   ngOnInit() {
-    const now = new Date();
-    this.maxDateRegister = (now.getFullYear() - 18) + '-' + now.getMonth() + '-' + (now.getDay() < 10 ? '0' : '') + now.getDay();
-    console.log(this.maxDateRegister);
 
     this._initForm();
   }
@@ -51,20 +50,18 @@ export class RegisterComponent implements OnInit {
     this.formRegister.disable();
 
     const user: User = this.formRegister.value;
-    user.fecha_nacimiento = user.fecha_nacimiento.split('/').join('-') ;
-
     this._authService.registerUser(user).subscribe((response) => {
-
       console.log('success:', response);
-
-      if ( response && response.status === 'Success') {
         this._router.navigate(['./auth/signin'])
-      }
-
       this.formRegister.enable();
-
       }, (error) => {
-        console.error(error, 'Ha ocurrido un error.');
+      if('message' in error){
+        console.log('hola linea 68');
+        console.log(error.error.message);
+        console.log(error.message)
+        this.errorMessage=error.error.message;
+        this.formRegister.enable();
+      }
       }
     )
   }
@@ -75,12 +72,12 @@ export class RegisterComponent implements OnInit {
 
   private _initForm(): void {
     this.formRegister = this._formBuilder.group({
-      correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirm_password: ['', Validators.required],
-      nombre_usuario: ['', Validators.required],
-      pais: ['', Validators.required],
-      fecha_nacimiento: ['', [Validators.required]]
+      emailUserCinema: ['', [Validators.required, Validators.email]],
+      usernameUserCinema: ['', [Validators.required]],
+      passwordUserCinema: ['', Validators.required],
+      nameUserCinema: ['', Validators.required],
+      surnameUserCinema: ['', Validators.required],
+      confirm_passwordUserCinema: ['', [Validators.required]]
     });
   }
 

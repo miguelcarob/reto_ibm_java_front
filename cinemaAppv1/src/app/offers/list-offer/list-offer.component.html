@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+
+<main>
+
+    <section class="pt-20 pb-48">
+        <div class="container mx-auto px-4">
+            <div class="mb-8">
+                <div class="text-2xl font-semibold text-center">
+                   Ofertas
+                </div>
+            </div>
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
+                     *ngFor="let offer of listOffers; let index = index">
+                    <div class="px-6">
+                        <img
+                                alt="..."
+                                src="https://st.depositphotos.com/1807998/2288/v/600/depositphotos_22885288-stock-illustration-cinema-design-template-with-snack.jpg"
+                                class="img-selected border-solid border-4 cursor-pointer shadow-lg rounded-full max-w-full mx-auto"
+                                [ngClass]="{'img-selected': offer.isSelected === true}"
+                                style="max-width: 120px;"
+                        />
+                        <div class="pt-6 text-center">
+                            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                                 {{offer.descriptionOffer}}
+                            </p>
+                            <p>
+                                Valida hasta: {{offer.deadlineOffer}}
+                            </p>
+
+                            <p>
+                                Mas información del Cine: {{offer.idCinema.webCinema}}
+                            </p>
+
+                            <h5 class="text-xl font-bold">Puntos {{offer.points }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+</main>
+

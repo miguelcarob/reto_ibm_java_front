@@ -1,7 +1,8 @@
 import {Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {createPopper} from '@popperjs/core';
-import {AuthService} from "../../../auth/auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from '../../../auth/auth.service';
+import {Router} from '@angular/router';
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-user-dropdown',
@@ -44,4 +45,17 @@ export class UserDropdownComponent implements AfterViewInit {
 
     this._authService.clearSessionData();
   }
+
+  private isLogged(): boolean {
+    const user = this._authService.userLocalStorage;
+
+    if (!user) {
+      return false;
+    }
+    return true;
+  }
+
+
+
+
 }

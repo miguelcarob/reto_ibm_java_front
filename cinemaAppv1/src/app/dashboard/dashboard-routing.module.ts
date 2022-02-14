@@ -8,16 +8,16 @@ import {TrendingComponent} from './trending/trending.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'showMovies',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'showMovies',
     component: HomeComponent,
     canActivate: [DashboardGuard],
   },
   {
-    path: 'my-likes',
+    path: 'my-listMovies',
     component: LikesComponent,
     canActivate: [DashboardGuard],
   },

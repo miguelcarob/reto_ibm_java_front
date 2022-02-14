@@ -8,18 +8,52 @@
     <!-- Brand -->
     <a
       class="flex text-white text-sm uppercase hidden lg:inline-block font-semibold"
-      href="./dashboard/home"
-    >PredictGames</a
+      href="./movies"
+    >CineWeb</a
     >
 
     <!-- Brand -->
     <a
       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
-      href="./dashboard/trending"
+      href="./movies"
       style="
     margin-left: 50px;"
-    >Tendencias
-      <i class="fas fa-chart-line ml-4"></i>
+    >Peliculas
+    </a>
+    
+    <!-- Brand -->
+    <a
+      class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+      href="./offers"
+      style="
+    margin-left: 50px;"
+    >Ofertas
+    </a>
+
+
+      <a [hidden]="!isAdministrator()"
+              class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+              href="./managment"
+              style="
+    margin-left: 50px;"
+      >Gestión De Plataforma
+      </a>
+
+
+    <a [hidden]="!isCinema()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./managment"
+       style="
+    margin-left: 50px;"
+    >Mis Ofertas
+    </a>
+
+    <a [hidden]="isLogged()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./"
+       style="
+    margin-left: 50px;"
+    >Ingresar/Registrarse
     </a>
     <!-- Form -->
     <form

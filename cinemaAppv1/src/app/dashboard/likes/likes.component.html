@@ -1,53 +1,51 @@
 <app-navbar></app-navbar>
 <main>
 
-  <section class="pt-20 pb-48">
-    <div class="container mx-auto px-4">
-      <div class="mb-8">
-        <div class="text-2xl font-semibold text-center">
-          Estos son los videojuegos que te han gustado.
-        </div>
-      </div>
-      <sa-spinner-diamond [size]="50" [thickness]="100" [speed]="100" color="#dd0031" secondaryColor="rgba(24, 24, 24, 0.1)" ></sa-spinner-diamond>
-      <div class="flex flex-wrap">
-        <ng-container *ngIf="myListFavoriteVideogames.length === 0">
-          <div class="flex text-2xl font-medium text-center mt-10 mx-auto">
-            No hay gustos relacionados. Interactua con la plataforma para adquirir gustos.
+  <div class="w-full lg:w-8/12 px-4">
+    <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-2"
+    >
+      <div class="flex-auto px-4 lg:px-10 pt-4 pt-0">
+        <form class="my-6" [formGroup]="formLogin">
+          <div class="relative w-full">
+            <label
+              class="block uppercase text-gray-800 text-xs font-bold mb-2"
+            >Correo</label
+            ><input
+            type="email"
+            class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+            placeholder="Correo"
+            [formControlName]="'usernameUserCinema'"
+            style="transition: all 0.15s ease 0s;"
+          />
           </div>
-        </ng-container>
-        <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
-             *ngFor="let videogame of myListFavoriteVideogames; let index = index">
-          <div class="px-6">
-            <img
-              alt="..."
-              src="./assets/img/control.png"
-              class="border-solid border-4 shadow-lg rounded-full max-w-full mx-auto"
-              style="max-width: 120px;"
-            />
-            <div class="pt-6 text-center">
-              <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                {{videogame.Name}}
-              </p>
-              <h5 class="text-xl font-bold">{{videogame.Year_of_Release | number: '1.0-0'}}</h5>
-              <div class="mt-6">
-
-                <button
-                  [ngClass]="{'bg-red-600 text-white': videogame.Puntuacion === -1,'bg-gray-100 btn-action-dislike': videogame.Puntuacion !== -1 }"
-                  class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                  (click)="dislikeVideogame(videogame, index)"
-                >
-                  <i
-                    [ngClass]="{fas: videogame.Puntuacion === -1, far: videogame.Puntuacion !== -1}"
-                    class="fa-thumbs-down"></i></button
-                >
-              </div>
-            </div>
+          <div class="relative w-full my-3">
+            <label
+              class="block uppercase text-gray-800 text-xs font-bold my-4 pt-2"
+            >Contraseña</label
+            ><input
+            type="password"
+            class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+            placeholder="Contraseña"
+            [formControlName]="'passwordUserCinema'"
+            style="transition: all 0.15s ease 0s;"
+          />
           </div>
-        </div>
+          <div class="text-center mt-6">
+            <button
+              class="btn-login bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+              type="submit"
+              style="transition: all 0.15s ease 0s;"
+              (click)="login()"
+              [disabled]="formLogin.invalid"
+            >
+              Editar información
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
-
+  </div>
 
 </main>
 <app-footer></app-footer>

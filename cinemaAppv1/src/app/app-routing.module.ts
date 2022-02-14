@@ -8,6 +8,14 @@ const routes: Routes = [
     redirectTo: 'auth',
   },
   {
+    path: 'createCinema',
+    loadChildren: () => import('./ofertas/ofertas.module').then((m) => m.OfertasModule)
+  },
+  {
+    path: 'offers',
+    loadChildren: () => import('./offers/offer.module').then((m) => m.OfferModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)
   },
@@ -15,6 +23,10 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
   },
+  {
+    path: 'movies',
+    loadChildren: () => import('./movies/movies.module').then((m) => m.MoviesModule)
+  }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {User} from './auth.types';
@@ -8,101 +8,101 @@ import {Router} from '@angular/router';
 
 
 @Injectable()
-export class AuthService {
-
-  // -----------------------------------------------------------------------------------------------------
-  // @ Attributes
-  // ----------------------------------------------------------------------------------------------------
-  private readonly API_URL =environment.apiUrl;
-
-  serviceLoading = false;
-
-  private _currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
+export class AuthService{
 
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Constructor
-  // -----------------------------------------------------------------------------------------------------
+    private readonly API_URL =environment.apiUrl;
 
-  constructor(
-    private _http: HttpClient,
-    private _router: Router
-  ) {
-  }
+    serviceLoading = false;
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Accessors
-  // -----------------------------------------------------------------------------------------------------
+    private _currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  get currentUser$(): Observable<any> {
-    return this._currentUser.asObservable();
-  }
+    constructor(
+        private _http: HttpClient,
+        private _router: Router
+    ) {
+    }
 
-  set currentUser(value: any) {
-    this._currentUser.next(value);
-  }
+    // -----------------------------------------------------------------------------------------------------
+    // @ Accessors
+    // -----------------------------------------------------------------------------------------------------
 
-  get userLocalStorage(): any {
-    return JSON.parse(localStorage.getItem('USER_SIST_RECOMEN'));
-  }
+    get currentUser$(): Observable<any> {
+        return this._currentUser.asObservable();
+    }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
+    set currentUser(value: any) {
+        this._currentUser.next(value);
+    }
 
-  signIn(user: User): Observable<any> {
+    get userLocalStorage(): any {
+        return JSON.parse(localStorage.getItem('user_cinemaApp'));
+    }
 
-    const headers = new HttpHeaders().set('Content-Type','application/json');
-    console.log("linea 56");
-    return this._http
-      .post(this.API_URL + 'users/login/', JSON.stringify(user),{headers:headers})
-      .pipe(
-        tap((response) => {
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
 
-          if ('emailUserCinema' in response) {
-            console.log("linea 62");
-            console.log(response)
-            user.cod_usuario = response.cod_usuario;
+    signIn(user: User): Observable<any> {
 
-            this._currentUser.next(user);
-            this._saveUserLocalStorage(user.usernameUserCinema, user.cod_usuario);
+        const headers = new HttpHeaders().set('Content-Type','application/json');
+        return this._http
+            // .post(this.API_URL + 'users/login/', JSON.stringify(user),{headers:headers})
+            .post(this.API_URL + 'users/login/', JSON.stringify(user),{headers})
+            .pipe(
+                tap((response) => {
 
-            this._router.navigate(['./dashboard']);
-          } else {
-            console.error('Error usu y contraseña');
-          }
+                    if ('emailUserCinema' in response) {
+                        user.user_table = response.user_table;
+                        user.usernameUserCinema=response.usernameUserCinema;
+                        user.typeUser=response.typeUser;
+                        this._currentUser.next(user);
+                        this._saveUserLocalStorage(user);
+                        this._router.navigate(['./movies']);
+                    } else {
+                        console.error('Error usu y contraseña');
+                    }
 
-        })
-      )
-  }
+                })
+            )
+    }
 
-  registerUser(user: User): Observable<any> {
-    return this._http.post(this.API_URL + 'usuarios/', user);
-  }
+    registerUser(user: User): Observable<any> {
+        const headers = new HttpHeaders().set('Content-Type','application/json');
+        return this._http.post(this.API_URL + 'users/createSubscriber/', JSON.stringify(user),{headers});
+    }
+    clearSessionData(): void {
+        this._currentUser.next(null);
+        localStorage.removeItem('user_cinemaApp');
+    }
 
-  getAllUsers(): void {
-    this._http.get<any>(this.API_URL + 'usuarios/').subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.name + ' ' + error.message);
-      }
-    );
-  }
+    // -----------------------------------------------------------------------------------------------------
+    // @ Private methods
+    // -----------------------------------------------------------------------------------------------------
 
-  clearSessionData(): void {
-    this._currentUser.next(null);
-    localStorage.removeItem('USER_SIST_RECOMEN');
-  }
+    private _saveUserLocalStorage(user: User): void {
+        localStorage.setItem('user_cinemaApp',
+            JSON.stringify({userTotal:user}));
+    }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Private methods
-  // -----------------------------------------------------------------------------------------------------
+    checkAuthType(): number {
+        const user = this.userLocalStorage;
+        if (!user) {
+            return 0;
+        }
+        return user.userTotal.typeUser;
+    }
 
-  private _saveUserLocalStorage(correo: string, codUsuario: number): void {
-    localStorage.setItem('USER_SIST_RECOMEN', JSON.stringify({correo, cod_usuario: codUsuario}));
-  }
+
+
+    checkAuthStatus(): Observable<boolean> {
+        const user = this.userLocalStorage;
+        console.log(user)
+        if (!user) {
+            return of(false);
+        }
+        return of(true);
+    }
 
 
 }

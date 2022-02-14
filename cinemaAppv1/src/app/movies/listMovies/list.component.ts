@@ -44,54 +44,17 @@ export class ListComponent implements OnInit {
   getAllMovies(): void {
     this._dashboardService.getAllMovies().subscribe((response) => {
           this.listMovies = response;
-
+          console.log(response);
+          for (const m in response) {
+            console.log(response[m].descriptionFilm);
+      }
         }, (error) => {
           console.error(error, 'Ha ocurrido un error.');
         }
     )
   }
 
-  recommenderMore(): void {
 
-    const juegos = [];
-
-    this.listMovies.forEach((videogame) => {
-      juegos.push({
-        Num: videogame.Num,
-        Puntuacion: videogame.Puntuacion
-      });
-    });
-
-    const body = {
-      juegos,
-      usuario: this._authService.userLocalStorage.cod_usuario
-    };
-    console.log(body);
-
-    this._dashboardService.getRecommendationContent(body).subscribe((response) => {
-
-          console.log('success:', response);
-
-          response.message.forEach((element) => {
-            element.Puntuacion = 0;
-          });
-
-          this.listMovies = response.message
-
-        }, (error) => {
-          console.error(error, 'Ha ocurrido un error.');
-        }
-    )
-  }
-
-  dislikeVideogame1(index: any): void {
-    if (this.listMovies[index].Puntuacion === -1) {
-      this.listMovies[index].Puntuacion = 0;
-    } else {
-      this.listMovies[index].Puntuacion = -1;
-      this.listMovies[index].isSelected = false;
-    }
-  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Private methods

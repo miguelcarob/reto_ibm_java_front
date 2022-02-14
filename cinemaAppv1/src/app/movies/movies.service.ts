@@ -37,17 +37,6 @@ export class MoviesService {
   getMovie(id: string): Observable<any> {
     return this._http.get<any>(this.API_URL + 'film/'+id);
   }
-  getRecommendationContent(body): Observable<any> {
-    return this._http.post<any>(this.API_URL + 'peliculas/', body);
-  }
-
-  getRecommendationUser(codUsuario: number): Observable<any> {
-    return this._http.get<any>(this.API_URL + 'recomendacionUsuario/' + codUsuario);
-  }
-
-  getMyFavoriteVideogames(codUsuario: number): Observable<any> {
-    return this._http.get<any>(this.API_URL + 'calificaciones/' + codUsuario);
-  }
 
   rateVideogame(codUser: number, codVideogame: number, puntuacion: number): Observable<any> {
     return this._http.post<any>(this.API_URL + 'peliculas/',

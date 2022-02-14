@@ -97,7 +97,6 @@ export class AuthService{
 
     checkAuthStatus(): Observable<boolean> {
         const user = this.userLocalStorage;
-        console.log(user)
         if (!user) {
             return of(false);
         }

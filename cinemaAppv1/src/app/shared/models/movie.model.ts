@@ -1,4 +1,4 @@
-import {Actor} from './Actor.model';
+import {Actor} from './Actor.interface.model';
 import {Category} from './Category.model';
 import {Director} from './director.model';
 

@@ -5,12 +5,6 @@
   <div
     class="flex w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
   >
-    <!-- Brand -->
-    <a
-      class="flex text-white text-sm uppercase hidden lg:inline-block font-semibold"
-      href="./movies"
-    >CineWeb</a
-    >
 
     <!-- Brand -->
     <a
@@ -33,16 +27,46 @@
 
       <a [hidden]="!isAdministrator()"
               class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
-              href="./managment"
+              href="./managment/movies"
               style="
     margin-left: 50px;"
-      >Gestión De Plataforma
+      >Gestión De Peliculas
       </a>
 
+    <a [hidden]="!isAdministrator()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./managment/actor"
+       style="
+    margin-left: 50px;"
+    >Gestión De Actores
+    </a>
+
+    <a [hidden]="!isAdministrator()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./managment/category"
+       style="
+    margin-left: 50px;"
+    >Gestión De Categorias
+    </a>
+    <a [hidden]="!isAdministrator()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./managment/director"
+       style="
+    margin-left: 50px;"
+    >Gestión De Directores
+    </a>
+
+    <a [hidden]="!isAdministrator()"
+       class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
+       href="./managment/cinema"
+       style="
+    margin-left: 50px;"
+    >Gestión De Cinemas
+    </a>
 
     <a [hidden]="!isCinema()"
        class="flex ml-20 text-white text-sm uppercase hidden lg:inline-block font-semibold"
-       href="./managment"
+       href="./offers/cinema"
        style="
     margin-left: 50px;"
     >Mis Ofertas

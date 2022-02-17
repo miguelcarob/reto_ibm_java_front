@@ -5,35 +5,44 @@
     <section class="pt-20 pb-48">
         <div class="container mx-auto px-4">
             <div class="mb-8">
-                <div class="text-2xl font-semibold text-center">
+                <div class="text-2xl font-semibold text-center text-gray-800">
                     Catálogo de Películas
                 </div>
             </div>
-            <div class="flex flex-wrap">
-                <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                    <div class="flex flex-wrap">
+                <div class="w-full md:w-1/2 lg:w-3/12 lg:mb-0 my-12 py-6 px-4"
                      *ngFor="let movie of listMovies; let index = index">
                     <div class="px-6">
                         <img
                                 alt="..."
-
+                                width="400px"
+                                height="100px"
                                 [src]="movie.descriptionFilm.split('$$$$')[1]"
-                                class="img-selected border-solid border-4 cursor-pointer shadow-lg rounded-full max-w-full mx-auto"
+                                class="img-selected border-10 cursor-pointer shadow-lg rounded-2 max-w-4 mx-auto"
                                 [ngClass]="{'img-selected': movie.isSelected === true}"
-                                style="max-width: 120px;"
+                                style="max-width: 220px;"
                                 (click)="likeVideogame(index)"
                         />
-                        <div class="pt-6 text-center">
-                            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                                <div class="col">
+                         <div class="card shadow-sm">
+                           <div class="card-body">
+
+                        <div class="pt-6">
+                            <p class="mt-1 text-sm text-gray-700 uppercase font-semibold">
                                 {{movie.titleFilm}}
                             </p>
-                            <p>
+                            <p class="card-text">
                                 {{movie.descriptionFilm.split('$$$$')[0]}}
                             </p>
                             <h5 class="text-xl font-bold">Año {{movie.releaseDateFilm }}</h5>
                             <div class="mt-6">
 
                                 <a [routerLink]="['../showMovies',movie.id ]"
-                                        class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                        class=" text-black w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1 text-center"
                                         (click)="dislikeVideogame(index)"
                                 >
                                     <i class="fas fa-solid fa-eye"></i></a
@@ -44,10 +53,13 @@
                 </div>
 
             </div>
+                </div>
+            </div>
 
-
-
+                </div></div>
         </div>
+                </div>
+            </div></div>
     </section>
 
 

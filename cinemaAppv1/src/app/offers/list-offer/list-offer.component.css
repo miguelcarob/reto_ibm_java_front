@@ -4,5 +4,11 @@
 
 .img-selected {
     border: 12px solid #2563eb;
+    width: auto;
+    height: 1px;
 }
 
+.container {
+    width: auto;
+    height: 40px;
+}

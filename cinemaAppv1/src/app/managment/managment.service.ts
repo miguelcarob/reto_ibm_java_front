@@ -36,7 +36,7 @@ export class ManagmentService {
 
   createItem(item):Observable<any>{
     const headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(this.API_URL + 'users/createSubscriber/', JSON.stringify(item),{headers});
+    return this._http.post(this.API_URL + 'actor/', JSON.stringify(item),{headers});
   }
 
   getItem(id):Observable<any>{
@@ -63,14 +63,16 @@ export class ManagmentService {
         'Something bad happened; please try again later.');
   };
 
-  updateItem(id,item) :Observable<any>{
+  updateItem(actor:Actor) :Observable<any>{
     const headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(this.API_URL + 'users/createSubscriber/', JSON.stringify(id),{headers});
+    console.log('Linea 68');
+    console.log(actor);
+    return this._http.put(this.API_URL + 'actor/', JSON.stringify(actor),{headers});
   }
 
 
   deleteItem(id:number):Observable<any> {
     const headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(this.API_URL + 'users/createSubscriber/', JSON.stringify(id),{headers});
+    return this._http.delete(this.API_URL + 'actor/'+id,{headers});
   }
 }

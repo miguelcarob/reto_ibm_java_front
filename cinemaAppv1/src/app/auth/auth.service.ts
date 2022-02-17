@@ -93,6 +93,14 @@ export class AuthService{
         return user.userTotal.typeUser;
     }
 
+    checkIdTable(): number {
+        const user = this.userLocalStorage;
+        if (!user) {
+            return 0;
+        }
+        return user.userTotal.user_table;
+    }
+
 
 
     checkAuthStatus(): Observable<boolean> {

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sistemas_recomendacion_bigdata_ueb.iml" filepath="$PROJECT_DIR$/.idea/sistemas_recomendacion_bigdata_ueb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cinemaApp.iml" filepath="$PROJECT_DIR$/.idea/cinemaApp.iml" />
     </modules>
   </component>
 </project>

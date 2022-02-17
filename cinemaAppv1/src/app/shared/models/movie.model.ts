@@ -1,13 +1,13 @@
-import {Actor} from './Actor.interface.model';
-import {Category} from './Category.model';
+import {Actor} from './actor.model';
+import {Category} from './category.model';
 import {Director} from './director.model';
 
-export interface Movie {
-    id:number,
-    titleFilm:string,
-    descriptionFilm:string,
-    releaseDateFilm:string,
-    actorsFilms:Actor[],
-    categoryFilms:Category[],
-    directorFilms:Director[]
+export class Movie {
+    id:number;
+    titleFilm:string;
+    descriptionFilm:string;
+    releaseDateFilm:Date;
+    actorsFilms:Actor[];
+    categoryFilms:Category[];
+    directorFilms:Director[];
 }

@@ -45,6 +45,7 @@ export class ListComponent implements OnInit {
     this._dashboardService.getAllMovies().subscribe((response) => {
           this.listMovies = response;
           console.log(response);
+      // tslint:disable-next-line:forin
           for (const m in response) {
             console.log(response[m].descriptionFilm);
       }

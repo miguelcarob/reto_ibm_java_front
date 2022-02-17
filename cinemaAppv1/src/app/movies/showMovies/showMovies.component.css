@@ -9,3 +9,18 @@
   display: flex;
   justify-content: center;
 }
+
+form {
+  position: relative;
+  list-style-type:armenian;
+}
+
+.text-align
+{
+  position: relative;
+  left: 340px;
+}
+
+.video {
+  position: relative;
+}

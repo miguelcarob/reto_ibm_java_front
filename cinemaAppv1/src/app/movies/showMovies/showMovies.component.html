@@ -12,10 +12,6 @@
          Peliculas
         </div>
       </div>
-
-
-
-
       <div class="flex flex-wrap">
         <iframe width="100%" height="400" src="https://www.youtube.com/embed/1ozGKlOzEVc" frameborder="0" allowfullscreen></iframe>
       </div>
@@ -29,20 +25,23 @@
 
 
   </section>
+  <form action="#">
+    <div class="text-align w-1/2 pr-20">
     <div class="container">
         <div class="row ">
             <div class="col-xs-12" >
-                <hr>
                 <h3>Titulo</h3>
                 <b>{{movFinal.titleFilm}}</b>
             </div>
         </div>
+<br>
         <div class="row ">
             <div class="col-xs-12" >
                 <hr>
                 <h3>Discripcción</h3>
                 <b>{{movFinal.descriptionFilm}}</b>
             </div>
+<br>
         </div>
         <div class="row ">
             <div class="col-xs-12" >
@@ -51,35 +50,39 @@
                 <b>{{movFinal.releaseDateFilm}}</b>
             </div>
         </div>
+<br>
         <div class="row ">
-            <div class="col-xs-12" >
+            <div class="col-xs-8" >
                 <hr>
                 <h3>Actores</h3>
-
                 <b>{{actorInformation()}} </b>
             </div>
         </div>
+<br>
         <div class="row ">
             <div class="col-xs-12" >
                 <hr>
                 <h3>Directores</h3>
-
-                <b>{{DirectorInformation()}} </b>
+                <b>{{DirectorInformation()}}</b>
             </div>
         </div>
-
+<br>
         <div class="row ">
             <div class="col-xs-12">
                 <hr>
                 <h3>Categoria</h3>
-
                 <b>{{categoryInformation()}} </b>
+                <hr>
             </div>
         </div>
     </div>
-    <div class="flex w-4/8 mx-auto mt-8">
+    </div>
+</form>
+<br>
+<br>
+    <div class="flex w-2/6 mx-auto mt-1">
         <button
-                class="bg-blue-600 text-white active:bg-gray-700 text-sm font-bold uppercase px-8 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                class="bg-blue-600 text-white active:bg-gray-700 text-sm font-bold uppercase py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                 type="button"
                 style="transition: all 0.15s ease 0s;"
         >

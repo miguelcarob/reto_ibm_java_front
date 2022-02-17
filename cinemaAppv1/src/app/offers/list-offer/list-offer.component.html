@@ -16,12 +16,17 @@
                         <img
                                 alt="..."
                                 src="https://st.depositphotos.com/1807998/2288/v/600/depositphotos_22885288-stock-illustration-cinema-design-template-with-snack.jpg"
-                                class="img-selected border-solid border-4 cursor-pointer shadow-lg rounded-full max-w-full mx-auto"
+                                class="img-selected border-solid cursor-pointer shadow-lg rounded-full max-w-4 mx-auto"
                                 [ngClass]="{'img-selected': offer.isSelected === true}"
                                 style="max-width: 120px;"
                         />
-                        <div class="pt-6 text-center">
-                            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            <div class="col">
+                              <div class="card shadow-sm">
+                                <div class="card-body">
+                    
+                        <div class="pt-6">
+                            <p class="mt-1 text-sm text-gray-700 uppercase font-semibold">
                                  {{offer.descriptionOffer}}
                             </p>
                             <p>
@@ -29,7 +34,7 @@
                             </p>
 
                             <p>
-                                Mas información del Cine: {{offer.idCinema.webCinema}}
+                                Mas información del cine: {{offer.idCinema.webCinema}}
                             </p>
 
                             <h5 class="text-xl font-bold">Puntos {{offer.points }}</h5>
@@ -40,7 +45,10 @@
             </div>
 
 
-
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

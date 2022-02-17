@@ -5,7 +5,7 @@ import {ActorComponent}  from './actor/actor.component';
 import {CinemaComponent}  from './cinema/cinema.component';
 import {CategoryComponent}  from './category/category.component';
 import {DirectorComponent}  from './director/director.component';
-
+import {MoviesComponent} from './movies/movies.component';
 
 import {ManagmentGuard} from './managment.guard';
 import {from} from 'rxjs';
@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'actor',
     component: ActorComponent
+  },
+  {
+    path: 'movies',
+    component: MoviesComponent
   },
   {
     path: 'category',

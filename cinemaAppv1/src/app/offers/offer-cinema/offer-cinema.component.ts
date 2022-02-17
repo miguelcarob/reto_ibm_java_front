@@ -1,40 +1,38 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
-import {Cinema} from '../../shared/models/cinema.model';
 import {MatTableDataSource} from '@angular/material/table';
 import {NgForm} from '@angular/forms';
-import {NewCinema} from '../../shared/models/newCinema.model';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {Movie} from '../../shared/models/movie.model';
-import {NewMovie} from '../../shared/models/newMovie.model';
-import {MoviesService} from './movies.service';
+import {OfferCinemaService} from './offer-cinema.service';
+import {Offer} from '../../shared/models/offer.model';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  templateUrl: './offer-cinema.component.html',
+  styleUrls: ['./offer-cinema.component.css']
 })
-export class MoviesComponent implements OnInit,AfterViewInit {
+export class OfferCinemaComponent implements OnInit,AfterViewInit {
 
-  data: Movie[];
-  displayedColumns = ['titleFilm','releaseDateFilm','imageFilm','edit','information','delete'];
+  data: Offer[];
+  displayedColumns = ['description','addPoints','subPoints','date','estado','edit','information','delete'];
 
 
-  dataSource = new MatTableDataSource<Movie>();
+  dataSource = new MatTableDataSource<Offer>();
   isEditMode = false;
 
   @ViewChild('entityForm', {static: false})
   entityForm: NgForm;
-  entityData: NewMovie;
+  entityData: Offer;
 
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private _movieService: MoviesService) {
-    this.entityData = {} as NewMovie;
+  constructor(private _offerCinemaService: OfferCinemaService, private _authService:AuthService) {
+    this.entityData = {} as Offer;
   }
 
   ngOnInit(): void {
@@ -48,7 +46,9 @@ export class MoviesComponent implements OnInit,AfterViewInit {
   }
 
   public getAllEntity() {
-    this._movieService.getList().subscribe((response: any) => {
+    const typeUser=this._authService.checkAuthType();
+    console.log(typeUser);
+    this._offerCinemaService.getList(this._authService.checkIdTable()).subscribe((response: any) => {
       console.log(response);
       this.dataSource.data = response;
     });
@@ -84,14 +84,14 @@ export class MoviesComponent implements OnInit,AfterViewInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
   addEntity() {
-    this.entityData.descriptionFilm=this.entityData.descriptionFilm+'$$$$'+this.entityData.imageFilm;
-    console.log(this.entityData);
-    this._movieService.createItem(this.entityData).subscribe((response: any) => {
+    this.entityData.idCinema=this._authService.checkIdTable();
+    this.entityData.totalOffers=0;
+    this._offerCinemaService.createItem(this.entityData).subscribe((response: any) => {
       this.getAllEntity();
-      this.entityData.titleFilm = '';
-      this.entityData.imageFilm = '';
-      this.entityData.descriptionFilm = '';
-      this.entityData.releaseDateFilm = new Date();
+      this.entityData.deadlineOffer = new Date();
+      this.entityData.addPoints = 0;
+      this.entityData.descriptionOffer = '';
+      this.entityData.subPoints = 0;
     });
   }
 
@@ -108,15 +108,18 @@ export class MoviesComponent implements OnInit,AfterViewInit {
   }
 
   updateEntity() {
-    const entityUpdate = new Movie();
-    entityUpdate.descriptionFilm=this.entityData.descriptionFilm+'$$$$'+this.entityData.imageFilm;
-    entityUpdate.titleFilm=this.entityData.titleFilm;
+    const entityUpdate = new Offer();
     entityUpdate.id=this.entityData.id;
-    entityUpdate.releaseDateFilm=this.entityData.releaseDateFilm;
-    this._movieService.updateItem(entityUpdate).subscribe((response: any) => {
+    entityUpdate.idCinema=this._authService.checkIdTable();
+    entityUpdate.descriptionOffer=this.entityData.descriptionOffer;
+    entityUpdate.deadlineOffer=this.entityData.deadlineOffer;
+    entityUpdate.subPoints=this.entityData.subPoints;
+    entityUpdate.addPoints=this.entityData.addPoints;
+    entityUpdate.totalOffers=this.entityData.totalOffers;
+    this._offerCinemaService.updateItem(entityUpdate).subscribe((response: any) => {
 
       // Approach #1 to update datatable data on local itself without fetching new data from server
-      this.dataSource.data = this.dataSource.data.map((o: Movie) => {
+      this.dataSource.data = this.dataSource.data.map((o: Offer) => {
         if (o.id === response.id) {
           o = response;
         }
@@ -137,9 +140,9 @@ export class MoviesComponent implements OnInit,AfterViewInit {
   }
 
   deleteEntity(id) {
-    this._movieService.deleteItem(id).subscribe((response: any) => {
-      // Approach #1 to update datatable data on local itself without fetching new data from server
-      this.dataSource.data = this.dataSource.data.filter((o: Movie) => {
+    this._offerCinemaService.deleteItem(id).subscribe((response: any) => {
+      console.log(response);
+      this.dataSource.data = this.dataSource.data.filter((o: Offer) => {
         return o.id !== id ? o : false;
       })
 
@@ -161,11 +164,14 @@ export class MoviesComponent implements OnInit,AfterViewInit {
   }
 
   editEntity(element) {
+    console.log(element)
+    this.entityData
+    this.entityData.addPoints=element.addPoints;
     this.entityData = _.cloneDeep(element);
-    this.entityData.descriptionFilm=element.descriptionFilm.split('$$$$')[0];
-    this.entityData.imageFilm=element.descriptionFilm.split('$$$$')[1];
+    console.log(this.entityData);
     this.isEditMode = true;
   }
+
   info(element) {
   }
 }

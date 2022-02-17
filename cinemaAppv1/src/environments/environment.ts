@@ -4,8 +4,9 @@
 
 export const environment = {
 
-  // apiUrl: 'http://127.0.0.1:8000/api_movies/',
-   apiUrl: 'https://intense-island-90187.herokuapp.com/',
+    // apiUrl: 'http://127.0.0.1:8000/api_movies/',
+    // apiUrl: 'https://intense-island-90187.herokuapp.com/',
+    apiUrl:'http://127.0.0.1:8002/',
   production: false
 };
 

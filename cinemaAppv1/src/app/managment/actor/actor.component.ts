@@ -5,7 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import { NgForm } from '@angular/forms';
 import * as _ from 'lodash';
-import {ManagmentService} from '../managment.service';
+import {ActorService} from './actor.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class ActorComponent implements OnInit,AfterViewInit {
   isEditMode=false;
 
   @ViewChild('actorForm', { static: false })
-  studentForm: NgForm;
+  ActorForm: NgForm;
 
   actorData:Actor;
 
@@ -34,12 +34,12 @@ export class ActorComponent implements OnInit,AfterViewInit {
 
 
 
-  constructor(  private _manageService: ManagmentService) {
+  constructor(  private _actorService: ActorService) {
     this.actorData={} as Actor;
   }
 
   ngOnInit(): void {
-    this.getAllActors();
+    this.getAllEntity();
     this.dataSource.sort = this.sort;
   }
   ngAfterViewInit(): void {
@@ -47,58 +47,67 @@ export class ActorComponent implements OnInit,AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public getAllActors(){
-    this._manageService.getList().subscribe((response: any) => {
-      console.log(response);
-      const data = this.dataSource.data;
-      for (const val of response) {
-        data.push(val);
-      }
-      this.dataSource.data = data;
-      console.log("linea 58");
-      console.log(this.dataSource.data);
+  public getAllEntity(){
+    this._actorService.getList().subscribe((response: any) => {
+      this.dataSource.data = response;
     });
-
- //   this._manageService.getList().subscribe((response:any) => {
-  //     this.data=response;
-  //     this.dataSource.data = this.data;
-  //    console.log(this.data)
-  //      }, (error) => {
-  //        console.error(error, 'Ha ocurrido un error.');
-  //      }
-  //  )
   }
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  public redirectToDetails = (id: string) => {
-
+  addEntity() {
+    this._actorService.createItem(this.actorData).subscribe((response: any) => {
+      this.dataSource.data.push({ ...response })
+      this.dataSource.data = this.dataSource.data.map(o => {
+        return o;
+      })
+    this.actorData.nameActor='';
+    });
   }
-  public redirectToUpdate = (id: string) => {
 
-  }
-  public redirectToDelete = (id: string) => {
-
-  }
 
   onSubmit() {
-
+    if (this.ActorForm.form.valid) {
+      if (this.isEditMode)
+        this.updateEntity()
+      else
+        this.addEntity();
+    } else {
+      console.log('Error en los datos ingresados');
+    }
   }
-
   cancelEdit() {
     this.isEditMode = false;
-    this.studentForm.resetForm();
+    this.ActorForm.resetForm();
   }
-
   editEntity(element) {
     this.actorData = _.cloneDeep(element);
     this.isEditMode = true;
   }
+  updateEntity() {
+    const actorUpdate = new Actor();
+    actorUpdate.id=this.actorData.id;
+    actorUpdate.nameActor=this.actorData.nameActor;
+    this._actorService.updateItem(actorUpdate).subscribe((response: any) => {
 
+      // Approach #1 to update datatable data on local itself without fetching new data from server
+      this.dataSource.data = this.dataSource.data.map((o: Actor) => {
+        if (o.id === response.id) {
+          o = response;
+        }
+        return o;
+      })
 
-  deleteItem(id) {
-    this._manageService.deleteItem(id).subscribe((response: any) => {
+      // Approach #2 to re-call getAllStudents() to fetch updated data
+      // this.getAllStudents()
+
+      this.cancelEdit()
+
+    });
+  }
+  deleteEntity(id) {
+    this._actorService.deleteItem(id).subscribe((response: any) => {
       // Approach #1 to update datatable data on local itself without fetching new data from server
       this.dataSource.data = this.dataSource.data.filter((o: Actor) => {
         return o.id !== id ? o : false;
@@ -110,5 +119,13 @@ export class ActorComponent implements OnInit,AfterViewInit {
       // this.getAllStudents()
     });
   }
+  public redirectToDetails = (id: string) => {
 
+  }
+  public redirectToUpdate = (id: string) => {
+
+  }
+  public redirectToDelete = (id: string) => {
+
+  }
 }

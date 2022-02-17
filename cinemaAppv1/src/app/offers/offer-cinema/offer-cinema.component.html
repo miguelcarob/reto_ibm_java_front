@@ -6,7 +6,7 @@
         <div class="container mx-auto px-4">
             <div class="mb-8">
                 <div class="text-2xl font-semibold text-center">
-                    Gestión de Películas
+                    Gestión de Ofertas
                 </div>
             </div>
 
@@ -14,25 +14,25 @@
             <div class="centerTest">
                 <form (submit)="onSubmit()" #entityForm="ngForm">
                     <mat-form-field [style.width.%]=100>
-                        <input matInput class="col-md-2" placeholder="Nombre Pelicula"
-                               name="titleFilm" required [(ngModel)]="entityData.titleFilm">
+                        <input matInput placeholder="Puntos a Agregar " name="points" required
+                               [(ngModel)]="entityData.addPoints">
                     </mat-form-field>
                     <br>
                     <mat-form-field [style.width.%]=100>
-                        <input matInput placeholder="Imagen Pelicula" name="imageFilm" required
-                               [(ngModel)]="entityData.imageFilm">
+                        <input matInput placeholder="Puntos a Restar " name="subPoints" required
+                               [(ngModel)]="entityData.subPoints">
                     </mat-form-field>
                     <br>
                     <mat-form-field appearance="fill" [style.width.%]=100>
-                        <mat-label>Fecha de lanzamiento</mat-label>
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="entityData.releaseDateFilm" name="date">
+                        <mat-label>Valida Hasta</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="entityData.deadlineOffer" name="dateVal">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width" appearance="fill" [style.width.%]=100>
-                        <mat-label>Descripcción de la pelicula</mat-label>
-                        <textarea matInput placeholder="" name="descriptionFilm" [(ngModel)]="entityData.descriptionFilm" ></textarea>
+                        <mat-label>Descripcción de la Oferta</mat-label>
+                        <textarea matInput placeholder="" name="descriptionFilm" [(ngModel)]="entityData.descriptionOffer" ></textarea>
                     </mat-form-field>
                     <br>
                     <ng-container *ngIf="isEditMode; else elseTemplate">
@@ -40,7 +40,7 @@
                         <a mat-button color="warn" (click)="cancelEdit()">Cancelar</a>
                     </ng-container>
                     <ng-template #elseTemplate>
-                        <button mat-button color="primary">Agregar Nueva Pelicula</button>
+                        <button mat-button color="primary">Agregar Nueva Oferta</button>
                     </ng-template>
 
                 </form>
@@ -62,20 +62,28 @@
                 </mat-form-field>
             </div>
 
-            <!--  displayedColumns = ['nameCinema','username','emailCinema','webPage', 'Acciones']; -->
+            <!--  displayedColumns = ['description','addPoints','subPoints','date'']; -->
             <table mat-table [dataSource]="dataSource" matSort>
 
-                <ng-container matColumnDef="titleFilm">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="titleFilm"> Titulo Película</th>
-                    <td mat-cell *matCellDef="let element"> {{element.titleFilm}} </td>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="description"> Descripccion Oferta</th>
+                    <td mat-cell *matCellDef="let element"> {{element.descriptionOffer.split('$$$$')[0].slice(0, 50)+"(...)"}} </td>
                 </ng-container>
-                <ng-container matColumnDef="releaseDateFilm">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="releaseDateFilm"> Fecha Lanzamiento</th>
-                    <td mat-cell *matCellDef="let element"> {{element.releaseDateFilm}} </td>
+                <ng-container matColumnDef="addPoints">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="addPoints">Puntos Agregar</th>
+                    <td mat-cell *matCellDef="let element"> {{element.addPoints}} </td>
                 </ng-container>
-                <ng-container matColumnDef="imageFilm">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="imageFilm">Imagen Película</th>
-                    <td mat-cell *matCellDef="let element"> {{ element.descriptionFilm.split('$$$$')[0].slice(0, 50)+"(...)"}} </td>
+                <ng-container matColumnDef="subPoints">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="subPoints">Puntos Restar</th>
+                    <td mat-cell *matCellDef="let element"> {{element.subPoints}} </td>
+                </ng-container>
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Fecha Máxima</th>
+                    <td mat-cell *matCellDef="let element"> {{ element.deadlineOffer}} </td>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="estado">Estado</th>
+                    <td mat-cell *matCellDef="let element"> {{ element.stateOffer ? "Activa":"Inactiva"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="edit">
                     <th mat-header-cell *matHeaderCellDef> Editar</th>

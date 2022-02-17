@@ -3,8 +3,22 @@ table {
     overflow-x: auto;
     overflow-y: hidden;
     min-width: 500px;
+    border: 2px;
 }
 th.mat-header-cell {
     text-align: left;
     max-width: 300px;
+}
+
+.mat-table {
+  width: 96%;
+  margin-left: 2%;
+}
+
+th {
+}
+
+.cont {
+  position: absolute;
+  left: 600px;
 }

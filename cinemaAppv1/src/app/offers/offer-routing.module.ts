@@ -5,6 +5,7 @@ import {CreateOfferComponent} from './create-offer/create-offer.component'
 import {EditOfferComponent} from './edit-offer/edit-offer.component';
 //
 import {OffferGuard} from './offfer.guard';
+import {OfferCinemaComponent} from './offer-cinema/offer-cinema.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,15 @@ const routes: Routes = [
   {
     path: 'list',
     component: ListOfferComponent,
+  },
+  {
+    path: 'cinemaOffer',
+    component: OfferCinemaComponent,
+  },
+  {
+    path: 'cinema',
+    component: CreateOfferComponent,
+    canActivate: [OffferGuard],
   },
   {
     path: 'create',

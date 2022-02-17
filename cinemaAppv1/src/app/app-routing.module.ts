@@ -8,10 +8,6 @@ const routes: Routes = [
     redirectTo: 'auth',
   },
   {
-    path: 'createCinema',
-    loadChildren: () => import('./ofertas/ofertas.module').then((m) => m.OfertasModule)
-  },
-  {
     path: 'managment',
     loadChildren: () => import('./managment/managment.module').then((m) => m.ManagmentModule)
   },
